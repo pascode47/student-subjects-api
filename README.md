@@ -38,7 +38,6 @@ The API will be available at `http://localhost:3000`.
 
 - **GET /students**: Returns a JSON response containing a list of students with their names and enrolled programs.
 - **GET /subjects**: Returns a JSON response listing all subjects associated with the Software Engineering program, organized by academic year.
-
 ## Dependencies
 
 - express
@@ -46,6 +45,20 @@ The API will be available at `http://localhost:3000`.
 - cors
 - dotenv
 - [other dependencies as needed]
+
+## Deployed API
+
+The API is deployed on AWS EC2 and can be accessed at:
+
+- Students endpoint: http://51.20.193.29/students
+- Subjects endpoint: http://51.20.193.29/subjects
+
+Or using the EC2 public DNS:
+
+- Students endpoint: http://ec2-51-20-193-29.eu-north-1.compute.amazonaws.com/students
+- Subjects endpoint: http://ec2-51-20-193-29.eu-north-1.compute.amazonaws.com/subjects
+
+## Contributing
 
 ## Contributing
 
