@@ -1,0 +1,28 @@
+{
+  "name": "student-subjects-api",
+  "version": "1.0.0",
+  "description": "A simple API for managing students and subjects in a Software Engineering program.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9",
+    "student-subjects-api": "file:"
+  },
+  "devDependencies": {
+    "jest": "^26.6.0",
+    "supertest": "^6.1.0"
+  },
+  "keywords": [
+    "API",
+    "students",
+    "subjects",
+    "software engineering"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
