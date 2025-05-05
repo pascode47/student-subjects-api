@@ -172,8 +172,8 @@ The application is accessible via the Nginx load balancer running on port 80 of 
 
 - **Frontend Application:** [http://51.21.170.68/](http://51.21.170.68/)
 - **API Endpoints:**
-    - Students: [http://51.21.170.68/api/students](http://51.21.170.68/api/students)
-    - Subjects: [http://51.21.170.68/api/subjects](http://51.21.170.68/api/subjects)
+    - Students: [http://51.21.170.68/students](http://51.21.170.68/students)
+    - Subjects: [http://51.21.170.68//subjects](http://51.21.170.68/subjects)
 
 *(Note: The public DNS name for the EC2 instance can also be used instead of the IP address)*
 
