@@ -1,0 +1,99 @@
+services:
+  # API Service Configuration
+  api:
+    # Build context removed, using image from Docker Hub
+    image: pbsuitedocker/student-subjects-api-api:latest # Use the pre-built image from Docker Hub
+    container_name: student_subjects_api_app # Optional: Define a specific container name
+    restart: always # Restart policy
+    # Port 3000 is not exposed directly to the host anymore,
+    # access is via the load balancer -> frontend -> api
+    environment:
+      # Pass environment variables to the API container
+      # MONGODB_URI points to the 'mongo' service name defined below
+      MONGODB_URI: mongodb://mongo:27017/student-subjects-api
+      PORT: 3000
+      NODE_ENV: production # Set environment to production for compose
+      # Add any other necessary environment variables from your .env file
+      # SECRET_KEY: your_secret_key_here # Example: uncomment and set if needed
+    depends_on:
+      - mongo # Ensure mongo starts before the api service
+    networks:
+      - app-network # Connect to the custom network
+
+  # MongoDB Service Configuration
+  mongo:
+    image: mongo:latest # Use the official MongoDB image
+    container_name: student_subjects_mongo_db # Optional: Define a specific container name
+    restart: always
+    volumes:
+      - mongo-data:/data/db # Persist database data using a named volume
+    networks:
+      - app-network # Connect to the custom network
+    # No ports exposed externally by default for security,
+    # the 'api' service connects via the internal network.
+
+  # Frontend Service Instances (x3)
+  frontend1:
+    # Build context removed, using image from Docker Hub
+    image: pbsuitedocker/student-subjects-frontend:latest # Use the pre-built image from Docker Hub
+    container_name: frontend_node_1
+    restart: always
+    environment:
+      NODE_ID: frontend1 # Pass Node ID as environment variable for Nginx config
+      # Add any other necessary runtime environment variables for Angular if needed
+    depends_on:
+      - api # Depends on the API service
+    networks:
+      - app-network
+
+  frontend2:
+    # Build context removed, using image from Docker Hub
+    image: pbsuitedocker/student-subjects-frontend:latest # Use the pre-built image from Docker Hub
+    container_name: frontend_node_2
+    restart: always
+    environment:
+      NODE_ID: frontend2
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+  frontend3:
+    # Build context removed, using image from Docker Hub
+    image: pbsuitedocker/student-subjects-frontend:latest # Use the pre-built image from Docker Hub
+    container_name: frontend_node_3
+    restart: always
+    environment:
+      NODE_ID: frontend3
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+  # Nginx Load Balancer Service
+  loadbalancer:
+    image: nginx:alpine # Use the official Nginx image
+    container_name: nginx_load_balancer
+    restart: always
+    ports:
+      - "80:80" # Expose port 80 to the host machine
+    volumes:
+      # Mount the load balancer configuration file
+      - ./nginx-loadbalancer.conf:/etc/nginx/conf.d/default.conf:ro # Read-only mount
+    depends_on:
+      # Depends on all frontend instances being available
+      - frontend1
+      - frontend2
+      - frontend3
+    networks:
+      - app-network
+
+# Define Networks
+networks:
+  app-network:
+    driver: bridge # Use the default bridge driver
+
+# Define Volumes
+volumes:
+  mongo-data: # Named volume for MongoDB data persistence
+    driver: local

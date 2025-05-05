@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Subject List</h2> <!-- Removed targetProgram -->
+  <button routerLink="/">Back to Home</button>
+
+  <div *ngIf="isLoading" class="loading">Loading subjects...</div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error && subjects.length > 0" class="subject-table">
+    <table>
+      <thead>
+        <tr>
+          <!-- Removed Code header -->
+          <th>Name</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subject of subjects">
+          <!-- Removed subject.code cell -->
+          <td>{{ subject.name }}</td>
+          <td>{{ subject.year }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!isLoading && !error && subjects.length === 0" class="no-data">
+    No subjects found. <!-- Removed targetProgram -->
+  </div>
+</div>

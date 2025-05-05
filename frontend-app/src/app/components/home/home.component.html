@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Welcome to the Student & Subject Portal</h1>
+
+  <div class="button-container">
+    <button routerLink="/students">View Students</button>
+    <button routerLink="/subjects">View Courses</button>
+  </div>
+
+  <div *ngIf="nodeId" class="node-info">
+    Served by Node: {{ nodeId }}
+  </div>
+  <div *ngIf="!nodeId" class="node-info">
+    Node ID not available.
+  </div>
+</div>

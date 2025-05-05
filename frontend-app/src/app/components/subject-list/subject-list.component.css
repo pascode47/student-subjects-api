@@ -1,0 +1,34 @@
+.container {
+  padding: 20px;
+}
+
+button {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.loading, .error-message, .no-data {
+  margin-top: 20px;
+  font-style: italic;
+}
+
+.error-message {
+  color: red;
+}
+
+.subject-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.subject-table th, .subject-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.subject-table th {
+  background-color: #f2f2f2;
+}

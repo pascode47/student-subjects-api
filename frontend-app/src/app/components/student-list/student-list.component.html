@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Student List</h2>
+  <button routerLink="/">Back to Home</button>
+
+  <div *ngIf="isLoading" class="loading">Loading students...</div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error && students.length > 0" class="student-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Program</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.name }}</td>
+          <td>{{ student.program }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!isLoading && !error && students.length === 0" class="no-data">
+    No students found.
+  </div>
+</div>
